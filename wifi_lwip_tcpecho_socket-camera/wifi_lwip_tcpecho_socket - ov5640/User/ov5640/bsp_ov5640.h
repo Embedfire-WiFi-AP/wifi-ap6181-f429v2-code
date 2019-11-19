@@ -62,7 +62,7 @@ typedef enum
     JPEG_2592x1944        =   0x09,     /* JPEG Image 2592*1944 Size */
 }ImageFormat_TypeDef;
 
-#define JPEG_FORMAT 		JPEG_640x480
+#define JPEG_FORMAT 		JPEG_320x240
 
 
 

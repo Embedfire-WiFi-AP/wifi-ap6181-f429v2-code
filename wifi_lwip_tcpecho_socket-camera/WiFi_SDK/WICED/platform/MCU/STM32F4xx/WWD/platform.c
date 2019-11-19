@@ -390,7 +390,7 @@ void platform_init_peripheral_irq_priorities( void )
 		/* Interrupt priority setup. Called by MiCO/platform/MCU/STM32F2xx/platform_init.c */
 //	NVIC_SetPriority( RTC_WKUP_IRQn    ,  1 ); /* RTC Wake-up event   */
 	NVIC_SetPriority( SDIO_IRQn        ,  5 ); /* WLAN SDIO           */
-	NVIC_SetPriority( DMA2_Stream3_IRQn,  6 ); /* WLAN SDIO DMA       */
+	NVIC_SetPriority( DMA2_Stream3_IRQn,  5 ); /* WLAN SDIO DMA       */
 //	NVIC_SetPriority( DMA2_Stream6_IRQn,  3 ); /* WLAN SPI DMA        */ //WLAN用的是SPI接口驱动方式
 //	NVIC_SetPriority( USART1_IRQn      ,  6 ); /* MICO_UART_1         */
 //	NVIC_SetPriority( DMA2_Stream7_IRQn,  7 ); /* MICO_UART_1 TX DMA  */
