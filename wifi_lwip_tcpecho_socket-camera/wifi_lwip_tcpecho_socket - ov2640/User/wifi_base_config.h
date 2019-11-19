@@ -49,8 +49,8 @@
 #define AP_SEC               WICED_SECURITY_WPA2_MIXED_PSK  /* 路由加密 */
 
 #define COUNTRY              WICED_COUNTRY_AUSTRALIA    /* 选择城市 据说澳大利亚的信号更强一些，这里选择为澳大利亚 */
-//#define USE_DHCP             WICED_TRUE     /* 是否使用 DHCP */
-#define USE_DHCP             WICED_FALSE     /* 是否使用 DHCP */
+#define USE_DHCP             WICED_TRUE     /* 是否使用 DHCP */
+//#define USE_DHCP             WICED_FALSE     /* 是否使用 DHCP */
 #define IP_ADDR              MAKE_IPV4_ADDRESS( 192, 168,   100,  128 )  /* 如果USE_DHCP为WICED_TRUE，则不需要 */
 #define GW_ADDR              MAKE_IPV4_ADDRESS( 192, 168,   100,   1 )   /* 如果USE_DHCP为WICED_TRUE，则不需要 */
 #define NETMASK              MAKE_IPV4_ADDRESS( 255, 255, 255,   0 )    /* 如果USE_DHCP为WICED_TRUE，则不需要 */
