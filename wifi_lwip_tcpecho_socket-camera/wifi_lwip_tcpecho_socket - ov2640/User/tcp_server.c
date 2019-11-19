@@ -194,21 +194,6 @@ void tcp_server_thread( void *arg )
 										 sizeof(int));    /* length of option value */
 				}
 
-//      while(1)
-//			{
-//				/*测试发送性能*/
-//					memset(queue_buff,send_data++,1024*50);
-//					if(send_data>9) {send_data=0;}
-//					
-//					write(client_fd,queue_buff,1024*50);
-//					vTaskDelay(50);//每秒20*50kB
-//					printf("count -> [%d]\r\n",num++);
-//			}				
-			
-			//1s 20 * 50kB =1000KB
-			//1min 60*1000KB=60 000
-			//1hour=60min 60*60*1000KB
-
         if( IsValidSocket( client_fd ) )
         {			
             tcp_server_log( "TCP Client %s:%d connected, fd: %d", inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port), client_fd );
@@ -223,10 +208,8 @@ void tcp_server_thread( void *arg )
                 {
 										//更新读指针		
 										cbReadFinish(&cam_circular_buff);                  		
-										//mico_thread_msleep(2);
-									//	host_rtos_delay_milliseconds(2);
-									
-										vTaskDelay(100);
+								
+										vTaskDelay(1);
 										continue;
                 }
 
@@ -241,7 +224,6 @@ void tcp_server_thread( void *arg )
 										break;
                 }
 								
-//								printf("send data OK!!!\r\n");
                 for(i = 0; i < 1; i ++)
                 {
                     //4.发送间隔数据
@@ -256,18 +238,12 @@ void tcp_server_thread( void *arg )
 
                                     //更新读指针		
 								cbReadFinish(&cam_circular_buff);
-								//CPU_TS_Tmr_Delay_MS(30);
-//                tcp_server_log("send->[%d]%d KB", packet_index, camera_data_len/1024);
 
-                //4.清除标志位
-//                clear_array_flag(packet_index);
             }
 
            // tcp_server_log("TCP Client disconnect %s:%d connected, fd: %d",client_ip_str, client_addr.s_port, client_fd);
             jpeg_socket_close( &client_fd );
 
-//            //5.关闭摄像头
-//            DCMI_Cmd(DISABLE);
         }
     }
 
