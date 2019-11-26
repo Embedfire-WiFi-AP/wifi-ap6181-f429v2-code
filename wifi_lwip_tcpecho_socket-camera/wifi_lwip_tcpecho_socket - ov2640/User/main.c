@@ -1,4 +1,3 @@
-
 #include "wwd_network.h"
 #include "wwd_management.h"
 #include "wwd_wifi.h"
