@@ -68,16 +68,16 @@ uint32_t CPU_TS_TmrRd(void)
   return ((uint32_t)DWT_CYCCNT);
 }
 
-///**
-//  * @brief  读取当前时间戳
-//  * @param  无
-//  * @retval 当前时间戳，即DWT_CYCCNT寄存器的值
-//	* 				此处给HAL库替换HAL_GetTick函数，用于os
-//  */
-//uint32_t HAL_GetTick(void)
-//{        
-//  return ((uint32_t)DWT_CYCCNT*1000/SysClockFreq);
-//}
+/**
+  * @brief  读取当前时间戳
+  * @param  无
+  * @retval 当前时间戳，即DWT_CYCCNT寄存器的值
+	* 				此处给HAL库替换HAL_GetTick函数，用于os
+  */
+uint32_t HAL_GetTick(void)
+{        
+  return ((uint32_t)DWT_CYCCNT*1000/SysClockFreq);
+}
 
 /**
   * @brief  采用CPU的内部计数实现精确延时，32位计数器

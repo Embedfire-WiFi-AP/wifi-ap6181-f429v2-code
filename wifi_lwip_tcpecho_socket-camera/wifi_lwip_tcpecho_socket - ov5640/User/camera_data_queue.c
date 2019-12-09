@@ -383,18 +383,6 @@ int32_t find_jpeg_tail(uint8_t *data,uint8_t *jpeg_start,int32_t search_point)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 /**
   * @brief  查找jpeg文件头和文件尾
   * @param  data:数据区指针

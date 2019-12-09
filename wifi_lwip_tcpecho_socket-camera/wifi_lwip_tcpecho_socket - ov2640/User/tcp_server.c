@@ -44,9 +44,9 @@ int32_t jpeg_send( int fd, const uint8_t *inBuf, size_t inBufLen )
     fd_set writeSet;
     struct timeval t;
 
-    require( fd>=0, exit );
-    require( inBuf, exit );
-    require( inBufLen, exit );
+//    require( fd>=0, exit );
+//    require( inBuf, exit );
+//    require( inBufLen, exit );
 
     err = kNotWritableErr;
 
@@ -196,10 +196,9 @@ void tcp_server_thread( void *arg )
 
         if( IsValidSocket( client_fd ) )
         {			
-            tcp_server_log( "TCP Client %s:%d connected, fd: %d", inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port), client_fd );
-//            //1.打开摄像头
-//            DCMI_Cmd(ENABLE);
+            printf( "TCP Client %s:%d connected, fd: %d\r\n", inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port), client_fd );
 
+						int time1=0,time2=0;
             while(1)
             {
                 //2.数据出队列
@@ -212,36 +211,37 @@ void tcp_server_thread( void *arg )
 										vTaskDelay(1);
 										continue;
                 }
-
-                tcp_server_log("jpeg_tcp_send->[%d]%d KB", packet_index, camera_data_len/1024);
+								cbPrint(&cam_circular_buff) ;//输出
+                printf("jpeg_tcp_send->[%d]%d KB\r\n", packet_index, camera_data_len/1024);
 												
                 //3.发送数据
                 if((err = jpeg_tcp_send(client_fd, (const uint8_t *)in_camera_data, camera_data_len)) != kNoErr)
 								{
 										//更新读指针		
 										cbReadFinish(&cam_circular_buff);
-										tcp_server_log("error-->[%d]%d KB", packet_index, camera_data_len/1024);
+										printf("error-->[%d]%d KB\r\n", packet_index, camera_data_len/1024);
 										break;
                 }
 								
                 for(i = 0; i < 1; i ++)
                 {
-                    //4.发送间隔数据
-                    if((err = jpeg_send(client_fd, (const uint8_t *)no_used_buff, NO_USED_BUFF_LEN)) != kNoErr)
-                    {
-                                            //更新读指针		
-                        cbReadFinish(&cam_circular_buff);
-                        tcp_server_log("error-->[%d]", packet_index);
-                        break;
-                    }
+
+										//4.发送间隔数据
+										if((err = jpeg_send(client_fd, (const uint8_t *)no_used_buff, NO_USED_BUFF_LEN)) != kNoErr)
+										{
+																						//更新读指针		
+												cbReadFinish(&cam_circular_buff);
+												printf("error-->[%d]\r\n", packet_index);
+												break;
+										}
                 }
 
                                     //更新读指针		
 								cbReadFinish(&cam_circular_buff);
+															
 
             }
 
-           // tcp_server_log("TCP Client disconnect %s:%d connected, fd: %d",client_ip_str, client_addr.s_port, client_fd);
             jpeg_socket_close( &client_fd );
 
         }
@@ -250,7 +250,7 @@ void tcp_server_thread( void *arg )
  exit:
     if( err != kNoErr )
     {
-        tcp_server_log( "Server listerner thread exit with err: %d", err );
+        printf( "Server listerner thread exit with err: %d\r\n", err );
     }
 
     jpeg_socket_close( &sock );	

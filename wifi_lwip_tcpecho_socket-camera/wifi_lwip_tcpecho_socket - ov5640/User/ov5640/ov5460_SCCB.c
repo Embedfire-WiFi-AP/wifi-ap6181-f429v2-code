@@ -88,7 +88,7 @@ int32_t OV5640_SCCB_Init(ImageFormat_TypeDef ImageFormat)
     
     OV5640_JPEGConfig(ImageFormat);
     ov5640_SCCB_log("OV5640_ImageFormat:%x\n",ImageFormat);
-    OV5640_AUTO_FOCUS();
+    //OV5640_AUTO_FOCUS();
     return kNoErr;
 }
 

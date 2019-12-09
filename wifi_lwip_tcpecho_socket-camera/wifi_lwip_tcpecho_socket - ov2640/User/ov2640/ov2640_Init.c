@@ -278,23 +278,9 @@ void DCMI_Stop(void)
 	data_p = cbWriteUsing(&cam_circular_buff);
 		
 	/*计算dma传输的数据个数，用于减少jpeg搜索文件尾的时间*/	
-	if (data_p != NULL)	
-	{
-		data_p->img_dma_len =0; //复位	
-		
-		if(CAMERA_QUEUE_DATA_LEN>65536*4)	//双dma buff
-		{
-			data_p->img_dma_len = (XferSize - DMA_GetCurrDataCounter(DMA2_Stream1))*4; //最后一个包
-			
-			if(dma_complete_counter>=2)
-				data_p->img_dma_len += ((dma_complete_counter-1)*XferSize)*4 ;		//	dma_complete_counter个大小为XferSize的包
-		}
-		else	//单dma buf
-			data_p->img_dma_len = (CAMERA_QUEUE_DATA_LEN/4 - DMA_GetCurrDataCounter(DMA2_Stream1))*4;
-	}
-	
+	data_p->img_dma_len = (XferSize - DMA_GetCurrDataCounter(DMA2_Stream1))*4; //最后一个包
 	/*写入缓冲区完毕*/
-	cbWriteFinish(&cam_circular_buff);
+	cbWriteFinish(&cam_circular_buff);//	 cb->end = cb->end_using;
 }
 
 

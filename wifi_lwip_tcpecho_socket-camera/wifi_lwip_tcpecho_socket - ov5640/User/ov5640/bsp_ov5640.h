@@ -55,14 +55,20 @@ typedef enum
     JPEG_640x480          =   0x02,     /* JPEG Image 640X480 Size */
     JPEG_800x600          =   0x03,     /* JPEG Image 800x600 Size */
     JPEG_1024x768         =   0x04,    	/* JPEG Image 1024x768 Size */
-	JPEG_1280x960         =   0x05,    	/* JPEG Image 1280x720 Size */
-	JPEG_1600x1200        =   0x06,    	/* JPEG Image 1600x1200 Size */
+		JPEG_1280x960         =   0x05,    	/* JPEG Image 1280x720 Size */
+		JPEG_1600x1200        =   0x06,    	/* JPEG Image 1600x1200 Size */
     JPEG_2048x1536        =   0x07,     /* JPEG Image 2048*1536 Size */
     JPEG_2320x1740        =   0x08,     /* JPEG Image 2320*1740 Size */
     JPEG_2592x1944        =   0x09,     /* JPEG Image 2592*1944 Size */
 }ImageFormat_TypeDef;
 
+//#define JPEG_FORMAT 		JPEG_160x120
 #define JPEG_FORMAT 		JPEG_320x240
+//#define JPEG_FORMAT 		JPEG_800x600
+//#define JPEG_FORMAT 		JPEG_1024x768
+//#define JPEG_FORMAT 		JPEG_1600x1200
+//#define JPEG_FORMAT 		JPEG_2592x1944
+
 
 
 
